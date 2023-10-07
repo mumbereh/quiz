@@ -1,288 +1,243 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Get the refresh form and add an event listener for form submission
-    const refreshForm = document.getElementById("refresh-form");
-    refreshForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent the form from submitting
-        resetQuiz(); // Call the resetQuiz function to reload the page
-    });
+const questions = [
+    {
+        question: "According to the Bible, what is the ultimate source of all true prophecy?",
+        choices: [
+            "(a) Human wisdom",
+            "(b) The interpretation of dreams",
+            "(c) The inspiration of the Holy Spirit",
+        ],
+        answer: "c",
+        reference: "2 Peter 1:21",
+    },
+    {
+        question: "What Bible verse famously declares that 'God is love'?",
+        choices: [
+            "(a) John 3:16",
+            "(b) 1 Corinthians 13:4",
+            "(c) 1 John 4:8",
+        ],
+        answer: "c",
+        reference: "1 John 4:8",
+    },
+    {
+        question: "In which book of the Bible do we find the story of God's wrath during the flood?",
+        choices: [
+            "(a) Genesis",
+            "(b) Exodus",
+            "(c) Numbers",
+        ],
+        answer: "a",
+        reference: "Genesis 6:5-8",
+    },
+    {
+        question: "According to the Bible, what is the first blessing given to humanity?",
+        choices: [
+            "(a) Prosperity",
+            "(b) Fruitfulness and multiplication",
+            "(c) Knowledge",
+        ],
+        answer: "b",
+        reference: "Genesis 1:28",
+    },
+    {
+        question: "What biblical passage describes the ideal qualities of a godly marriage relationship?",
+        choices: [
+            "(a) 1 Corinthians 13:4-7",
+            "(b) Ephesians 6:1-4",
+            "(c) Proverbs 1:8-9",
+        ],
+        answer: "a",
+        reference: "1 Corinthians 13:4-7",
+    },
+    {
+        question: "In the Bible, what does Romans 13:1-7 teach about our relationship with worldly leaders?",
+        choices: [
+            "(a) We should rebel against them",
+            "(b) We should submit to their authority",
+            "(c) We should form our own government",
+        ],
+        answer: "b",
+        reference: "Romans 13:1-7",
+    },
+    {
+        question: "What biblical passage instructs church leaders about the qualifications for overseers and deacons?",
+        choices: [
+            "(a) 1 Timothy 2:5-6",
+            "(b) 1 Timothy 3:1-13",
+            "(c) Titus 2:1-8",
+        ],
+        answer: "b",
+        reference: "1 Timothy 3:1-13",
+    },
+    {
+        question: "According to the Bible, what is the 'whole armor of God' mentioned in Ephesians 6:11-18?",
+        choices: [
+            "(a) A physical weapon",
+            "(b) Spiritual attire for believers",
+            "(c) A fortress",
+        ],
+        answer: "b",
+        reference: "Ephesians 6:11-18",
+    },
+    {
+        question: "What warning is given in 2 Timothy 4:3-4 about people's attitudes toward sound doctrine?",
+        choices: [
+            "(a) People will eagerly seek sound doctrine",
+            "(b) People will no longer tolerate sound doctrine",
+            "(c) Sound doctrine is irrelevant",
+        ],
+        answer: "b",
+        reference: "2 Timothy 4:3-4",
+    },
+    {
+        question: "According to the Bible, what signs are associated with the 'last days'?",
+        choices: [
+            "(a) Peace and unity among nations",
+            "(b) False prophets and wars",
+            "(c) Abundance of food and resources",
+        ],
+        answer: "b",
+        reference: "Matthew 24:4-14",
+    },
+    {
+        question: "What biblical event is often associated with the phrase 'as in the days of Noah'?",
+        choices: [
+            "(a) The Exodus",
+            "(b) The Second Coming of Christ",
+            "(c) The rebuilding of Jerusalem",
+        ],
+        answer: "b",
+        reference: "Matthew 24:37-39",
+    },
+    {
+        question: "In the Bible, what is the 'abomination of desolation' mentioned in the context of the end times?",
+        choices: [
+            "(a) An idolatrous image in the temple",
+            "(b) A celestial phenomenon",
+            "(c) A great war",
+        ],
+        answer: "a",
+        reference: "Matthew 24:15-16",
+    },
+    {
+        question: "What biblical prophecy describes a time when 'nation will rise against nation'?",
+        choices: [
+            "(a) The prophecy of the Second Coming",
+            "(b) The prophecy of the rebuilding of the temple",
+            "(c) The prophecy of the birth of Christ",
+        ],
+        answer: "a",
+        reference: "Matthew 24:7",
+    },
+    {
+        question: "What biblical event is associated with the 'sun being darkened' and 'the moon not giving its light'?",
+        choices: [
+            "(a) The crucifixion of Jesus",
+            "(b) The Day of Pentecost",
+            "(c) The Second Coming of Christ",
+        ],
+        answer: "c",
+        reference: "Matthew 24:29",
+    },
+    {
+        question: "In the Bible, what parable illustrates the importance of being watchful for the return of the Lord?",
+        choices: [
+            "(a) The Parable of the Sower",
+            "(b) The Parable of the Good Samaritan",
+            "(c) The Parable of the Ten Virgins",
+        ],
+        answer: "c",
+        reference: "Matthew 25:1-13",
+    },
+    {
+        question: "What biblical prophecy mentions 'wars and rumors of wars' as a sign of the end times?",
+        choices: [
+            "(a) Isaiah 2:4",
+            "(b) Daniel 7:13-14",
+            "(c) Matthew 24:6",
+        ],
+        answer: "c",
+        reference: "Matthew 24:6",
+    },
+    {
+        question: "According to the Bible, what is the 'great tribulation' mentioned in Matthew 24:21?",
+        choices: [
+            "(a) A period of worldwide peace and prosperity",
+            "(b) A time of intense suffering and persecution for believers",
+            "(c) A season of miraculous signs and wonders",
+        ],
+        answer: "b",
+        reference: "Matthew 24:21",
+    },
+    {
+        question: "What biblical prophecy speaks of a 'new heaven and a new earth'?",
+        choices: [
+            "(a) Isaiah 65:17",
+            "(b) Ezekiel 37:1-14",
+            "(c) Revelation 21:1",
+        ],
+        answer: "c",
+        reference: "Revelation 21:1",
+    },
+    {
+        question: "In the book of Revelation, what does the 'mark on the forehead' symbolize?",
+        choices: [
+            "(a) A literal mark on the forehead",
+            "(b) Loyalty to God",
+            "(c) A sign of the beast's authority",
+        ],
+        answer: "b",
+        reference: "Revelation 7:3",
+    },
+    {
+        question: "What is the 'tree of life' mentioned in Revelation 22:14, and what does it symbolize?",
+        choices: [
+            "(a) A literal tree with healing leaves",
+            "(b) Eternal life through faith in Christ",
+            "(c) A source of physical nourishment",
+        ],
+        answer: "b",
+        reference: "Revelation 22:14",
+    },
+];
 
-    // Function to reset the quiz by reloading the page
-    function resetQuiz() {
-        location.reload(); // Reload the page to start the quiz over
-    }
+
+    let currentQuestionIndex = 0;
+let score = 0;
+let hasSubmitted = false;
+const userAnswers = [];
+
+// DOM Elements
+const quizForm = document.getElementById("quiz-form");
+const nextButton = document.getElementById("next-btn");
+const submitButton = document.getElementById("submit-btn");
+const reviewButton = document.getElementById("review-btn");
+const firstnameInput = document.getElementById("firstname");
+const lastnameInput = document.getElementById("lastname");
+const questionText = document.getElementById("question-text");
+const closeButton = document.getElementById("close-btn");
+const refreshForm = document.getElementById("refresh-form");
+const reviewSection = document.querySelector(".review-section");
+const reviewList = document.getElementById("review-list");
+
+// Event Listeners
+submitButton.style.display = "block";
+reviewButton.style.display = "none";
+
+submitButton.addEventListener("click", function () {
+    checkAnswer();
+    reviewButton.style.display = "block";
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Get elements from the DOM
-    const closeButton = document.getElementById("close-btn");
-    const quizForm = document.getElementById("quiz-form");
-    const nextButton = document.getElementById("next-btn");
-    const submitButton = document.getElementById("submit-btn");
-    const firstnameInput = document.getElementById("firstname");
-    const lastnameInput = document.getElementById("lastname");
-    const questionText = document.getElementById("question-text");
+    refreshForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        resetQuiz();
+    });
 
-    // Function to check if the first name and last name fields are filled
-    function checkNameFields() {
-        const firstNameValue = firstnameInput.value.trim();
-        const lastNameValue = lastnameInput.value.trim();
-
-        if (firstNameValue === "" || lastNameValue === "") {
-            highlightEmptyFields();
-            return false;
-        }
-        return true;
-    }
-
-    // Function to highlight empty fields
-    function highlightEmptyFields() {
-        const firstNameValue = firstnameInput.value.trim();
-        const lastNameValue = lastnameInput.value.trim();
-
-        firstnameInput.style.borderColor = firstNameValue === "" ? "red" : "";
-        lastnameInput.style.borderColor = lastNameValue === "" ? "red" : "";
-    }
-    const questions = [
-        {
-            question: "What is the biblical significance of the number '40' in the Bible?",
-            choices: [
-                "(a) Represents perfection",
-                "(b) Symbolizes testing and trial",
-                "(c) Signifies abundance",
-            ],
-            answer: "b",
-        },
-        {
-            question: "Who was the prophet that was taken up to heaven in a chariot of fire?",
-            choices: [
-                "(a) Elijah",
-                "(b) Elisha",
-                "(c) Isaiah",
-            ],
-            answer: "a",
-        },
-        {
-            question: "In which book of the Bible do we find the story of the three Hebrews in the fiery furnace?",
-            choices: [
-                "(a) Genesis",
-                "(b) Daniel",
-                "(c) Ezekiel",
-            ],
-            answer: "b",
-        },
-        {
-            question: "What is the name of the Apostle Paul's companion who wrote the Gospel of Mark?",
-            choices: [
-                "(a) Luke",
-                "(b) Barnabas",
-                "(c) Timothy",
-            ],
-            answer: "b",
-        },
-        {
-            question: "Who is known as the 'weeping prophet' in the Old Testament?",
-            choices: [
-                "(a) Isaiah",
-                "(b) Jeremiah",
-                "(c) Ezekiel",
-            ],
-            answer: "b",
-        },
-        // Revised Questions about Offerings and Tithe
-        {
-            question: "What is the biblical tithe typically calculated as a percentage of one's income?",
-            choices: [
-                "(a) 5%",
-                "(b) 10%",
-                "(c) 15%",
-            ],
-            answer: "b",
-        },
-        {
-            question: "In the Bible, what did Abel offer to God that pleased Him?",
-            choices: [
-                "(a) Grains",
-                "(b) Livestock",
-                "(c) Fruits",
-            ],
-            answer: "b",
-        },
-        {
-            question: "What is the purpose of a tithe according to biblical teachings?",
-            choices: [
-                "(a) To support the church",
-                "(b) To fund social programs",
-                "(c) To support the poor and widows",
-            ],
-            answer: "c",
-        },
-        {
-            question: "Which book in the Bible mentions the story of the widow's mite?",
-            choices: [
-                "(a) Genesis",
-                "(b) Exodus",
-                "(c) Mark",
-                "(d) Luke",
-            ],
-            answer: "d",
-        },
-        {
-            question: "What did Zacchaeus promise to do as a sign of his repentance?",
-            choices: [
-                "(a) Give half of his possessions to the poor",
-                "(b) Pay back four times the amount he cheated from others",
-                "(c) Fast for 40 days",
-            ],
-            answer: "b",
-        },
-        // Revised Questions from the Last Books of the Old Testament
-        {
-            question: "Which prophet wrote the book of Malachi?",
-            choices: [
-                "(a) Isaiah",
-                "(b) Jeremiah",
-                "(c) Malachi",
-                "(d) Zechariah",
-            ],
-            answer: "c",
-        },
-        {
-            question: "What does the name 'Malachi' mean?",
-            choices: [
-                "(a) Messenger of God",
-                "(b) Faithful servant",
-                "(c) King of Israel",
-            ],
-            answer: "a",
-        },
-        {
-            question: "Which Old Testament book contains the prophecies of the coming of Elijah before the great day of the Lord?",
-            choices: [
-                "(a) Malachi",
-                "(b) Zechariah",
-                "(c) Joel",
-            ],
-            answer: "a",
-        },
-        {
-            question: "Which Old Testament book emphasizes the importance of returning tithes and offerings to God?",
-            choices: [
-                "(a) Malachi",
-                "(b) Haggai",
-                "(c) Zechariah",
-            ],
-            answer: "a",
-        },
-        {
-            question: "In which book of the Old Testament is the story of Esther found?",
-            choices: [
-                "(a) Nehemiah",
-                "(b) Job",
-                "(c) Esther",
-            ],
-            answer: "c",
-        },
-        // Revised Questions about the Book of Revelation
-        {
-            question: "Who is traditionally believed to be the author of the Book of Revelation?",
-            choices: [
-                "(a) John the Baptist",
-                "(b) John the Apostle",
-                "(c) James",
-            ],
-            answer: "b",
-        },
-        {
-            question: "What number is often associated with the Book of Revelation, representing perfection and completeness?",
-            choices: [
-                "(a) 3",
-                "(b) 7",
-                "(c) 12",
-            ],
-            answer: "b",
-        },
-        {
-            question: "In the Book of Revelation, what is the final destination of the righteous?",
-            choices: [
-                "(a) Purgatory",
-                "(b) Heaven",
-                "(c) Hell",
-            ],
-            answer: "b",
-        },
-        {
-            question: "What is the symbolic number of the beast in the Book of Revelation?",
-            choices: [
-                "(a) 666",
-                "(b) 777",
-                "(c) 888",
-            ],
-            answer: "a",
-        },
-        {
-            question: "In the Book of Revelation, what is the final fate of Satan?",
-            choices: [
-                "(a) Eternal torment",
-                "(b) Redemption",
-                "(c) Annihilation",
-            ],
-            answer: "c",
-        },
-    ];
-
-    let currentQuestionIndex = 0; // Index to keep track of the current question
-    let score = 0; // Variable to store the quiz score
-    let hasSubmitted = false; // Flag to check if the quiz has been submitted
-
-    // Function to load a question and its choices
-    function loadQuestion() {
-        const currentQuestion = questions[currentQuestionIndex];
-        questionText.textContent = currentQuestion.question;
-
-        const choicesHTML = currentQuestion.choices.map(choice => {
-            return `<label><input type="radio" name="q" value="${choice.charAt(1).toLowerCase()}">${choice}</label><br>`;
-        }).join("");
-
-        quizForm.innerHTML = choicesHTML;
-    }
-
-    // Function to check the selected answer and proceed to the next question
-    function checkAnswer() {
-        if (hasSubmitted) {
-            alert("You have already submitted the quiz. Please take a screenshot of your results.");
-            return;
-        }
-
-        if (!checkNameFields()) {
-            return; // Don't proceed with the quiz if name fields are not filled
-        }
-
-        const selectedAnswer = document.querySelector('input[name="q"]:checked');
-        if (selectedAnswer) {
-            if (selectedAnswer.value === questions[currentQuestionIndex].answer) {
-                score++; // Increase the score if the answer is correct
-            }
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion(); // Load the next question
-            } else {
-                const fullName = `${firstnameInput.value} ${lastnameInput.value}`;
-                questionText.textContent = `Quiz completed, ${fullName}! Your score: ${score}/${questions.length}`;
-                quizForm.style.display = "none";
-                nextButton.style.display = "none";
-                submitButton.style.display = "block";
-                hasSubmitted = true;
-            }
-        } else {
-            alert("Please select an answer before submitting.");
-        }
-    }
-
-    // Add event listeners
     nextButton.addEventListener("click", checkAnswer);
     loadQuestion();
 
-    // Reset border color on input focus
     firstnameInput.addEventListener("focus", () => {
         firstnameInput.style.borderColor = "";
     });
@@ -291,9 +246,108 @@ document.addEventListener("DOMContentLoaded", function () {
         lastnameInput.style.borderColor = "";
     });
 
-    // Add an event listener to the close button to close the window
     closeButton.addEventListener("click", function () {
         window.close();
     });
+
+    reviewButton.addEventListener("click", reviewScore);
 });
 
+// Functions
+function loadQuestion() {
+    const currentQuestion = questions[currentQuestionIndex];
+    questionText.textContent = currentQuestion.question;
+
+    const choicesHTML = currentQuestion.choices.map((choice, index) => {
+        return `<label><input type="radio" name="q${currentQuestionIndex}" value="${String.fromCharCode(97 + index)}">${choice}</label><br>`;
+    }).join("");
+
+    quizForm.innerHTML = choicesHTML;
+}
+
+function checkAnswer() {
+    if (hasSubmitted) {
+        alert("You have already submitted the quiz. Please take a screenshot of your results.");
+        return;
+    }
+
+    if (!checkNameFields()) {
+        return;
+    }
+
+    const selectedAnswer = document.querySelector(`input[name="q${currentQuestionIndex}"]:checked`);
+    if (selectedAnswer) {
+        if (selectedAnswer.value === questions[currentQuestionIndex].answer) {
+            score++;
+        }
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            const fullName = `${firstnameInput.value} ${lastnameInput.value}`;
+            questionText.textContent = `Quiz completed, ${fullName}! Your score: ${score}/${questions.length}`;
+            quizForm.style.display = "none";
+            nextButton.style.display = "none";
+            submitButton.style.display = "none";
+            reviewButton.style.display = "block";
+            hasSubmitted = true;
+        }
+    } else {
+        alert("Please select an answer before submitting.");
+    }
+}
+
+function checkNameFields() {
+    const firstNameValue = firstnameInput.value.trim();
+    const lastNameValue = lastnameInput.value.trim();
+
+    if (firstNameValue === "" || lastNameValue === "") {
+        highlightEmptyFields();
+        return false;
+    }
+    return true;
+}
+
+function highlightEmptyFields() {
+    const firstNameValue = firstnameInput.value.trim();
+    const lastNameValue = lastnameInput.value.trim();
+
+    firstnameInput.style.borderColor = firstNameValue === "" ? "red" : "";
+    lastnameInput.style.borderColor = lastNameValue === "" ? "red" : "";
+}
+
+function resetQuiz() {
+    location.reload();
+}
+
+function reviewScore() {
+    reviewList.innerHTML = "";
+
+    for (let i = 0; i < questions.length; i++) {
+        const currentQuestion = questions[i];
+        const selectedAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+        const answerElement = document.createElement("li");
+
+        if (selectedAnswer) {
+            const userAnswer = selectedAnswer.value;
+            const isCorrect = userAnswer === currentQuestion.answer;
+
+            answerElement.textContent = `${i + 1}. ${currentQuestion.question}`;
+
+            if (isCorrect) {
+                answerElement.classList.add("correct");
+                answerElement.innerHTML += " &#10004;";
+            } else {
+                answerElement.classList.add("wrong");
+                answerElement.innerHTML += ` &#10008; (Your answer: ${userAnswer}, Correct: ${currentQuestion.answer})`;
+            }
+        } else {
+            answerElement.textContent = `${i + 1}. ${currentQuestion.question} (No answer provided)`;
+            answerElement.classList.add("unanswered");
+        }
+
+        reviewList.appendChild(answerElement);
+    }
+
+    reviewSection.style.display = "block";
+}
