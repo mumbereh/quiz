@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Close Button -->
+    <header class="header">
+        <div class="close-button" id="close-btn">X</div>
+        <img src="family.jpeg" alt="Logo" class="logo">
+        <h1>Asher Family</h1>
+    </header>
+    <div class="participant-info">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" class="required-input">
+        <br>
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" class="required-input">
+    </div>
+    <div class="quiz-container">
+        <h3>Weekly bible Quiz</h3>
+        <div class="question">
+            <p id="question-text"></p>
+            <hr>
+            <form id="quiz-form"></form>
+        </div>
+        <div class="button-container">
+       
+            <button id="next-btn" class="button">Next</button>
+         
+            <button id="submit-btn" class="button" style="display: none;">Submit</button>
+         
+            <form id="refresh-form">
+                <button type="submit" id="refresh-btn" class="button">Refresh Page</button>
+            </form>
+        </div>
+ </div>
+    
+    <div class="verse-section">
+        <p id="verse">
+            "For I know the plans I have for you," declares the LORD,
+            "plans to prosper you and not to harm you, plans to give you hope and a future." - Jeremiah 29:11
+        </p>
+    </div>
+    <p id="designer">@Bro. Mumbere Habert</p>
+
+    <script src="index.js"></script>
+</body>
+</html>
