@@ -89,17 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             answer: "a"
         },
         {
-            question: "Examine the symbolism of the number of years Jacob worked for Rachel in Genesis 29. How does this timeframe connect to biblical themes?",
-            choices: [
-                "(a) It signifies a divine covenant between Jacob and Laban.",
-                "(b) It reflects Jacob's humility and patience in pursuing Rachel.",
-                "(c) It corresponds to the seven days of creation.",
-                "(d) It represents the lunar calendar used by the Israelites."
-            ],
-            answer: "b"
-
-            },
-            {
+         
             question: "In Genesis 29, what was Jacob's initial emotional response upon seeing Rachel, and what implications did it have for their relationship?",
             choices: [
                 "(a) He felt joy, foreseeing a harmonious marriage.",
