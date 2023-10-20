@@ -42,8 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
         firstnameInput.style.borderColor = firstNameValue === "" ? "red" : "";
         lastnameInput.style.borderColor = lastNameValue === "" ? "red" : "";
     }
- 
-
     const questions = [
         {
             question: "In Genesis 29, Asher was one of the sons of Jacob. What were the unique characteristics or blessings associated with Asher's tribe among the twelve tribes of Israel, and how did they contribute to the nation's history?",
@@ -57,13 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
             answer: "b"
         },
         {
-            question: "In the context of Asher's role within the twelve tribes of Israel, what symbolism or significance can be attributed to the 'olive oil' mentioned in the blessing of Asher in Deuteronomy 33:24? How did this element influence the tribe's identity?",
-            choices: [
-                "(a) Olive oil symbolized Asher's peace-loving nature and diplomacy among the tribes.",
-                "(b) Olive oil signified Asher's contributions to Israel's religious ceremonies and anointing of leaders.",
-                "(c) Olive oil represented Asher's strength and dominance in trade and commerce.",
-                "(d) Olive oil had no specific meaning in the context of Asher."
-=======
+
             choices: [
                 "(a) Asher's tribe excelled in military leadership and conquests.",
                 "(b) Asher's territory was known for its fertile lands and abundance, playing a vital role in providing for the nation.",
@@ -72,16 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             ],
             answer: "b"
-        },
-        {
-
-            question: "In Genesis 29, what was Jacob's initial emotional response upon seeing Rachel, and what implications did it have for their relationship?",
-            choices: [
-                "(a) He felt joy, foreseeing a harmonious marriage.",
-                "(b) He wept, sensing an imminent separation from Rachel.",
-                "(c) He laughed, revealing his excitement.",
-                "(d) He bowed, acknowledging her authority."
-
+    
+            },
+            {
             question: "In the context of Asher's role within the twelve tribes of Israel, what symbolism or significance can be attributed to the 'olive oil' mentioned in the blessing of Asher in Deuteronomy 33:24? How did this element influence the tribe's identity?",
             choices: [
                 "(a) Olive oil symbolized Asher's peace-loving nature and diplomacy among the tribes.",
@@ -112,15 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 "(d) It represents the lunar calendar used by the Israelites."
             ],
             answer: "b"
-        },
-        {
-            question: "Analyze the naming of Jacob's first two sons in Genesis 29. What prophetic significance can be attributed to their names?",
-            choices: [
-                "(a) Their names symbolize peace and unity among siblings.",
-                "(b) Their names imply divine intervention in family matters.",
-                "(c) Their names suggest harmony and prosperity in their future lives.",
-                "(d) Their names reflect the tribes they would father."
 
+            },
+            {
             question: "In Genesis 29, what was Jacob's initial emotional response upon seeing Rachel, and what implications did it have for their relationship?",
             choices: [
                 "(a) He felt joy, foreseeing a harmonious marriage.",
@@ -147,25 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 "(b) It reflects Jacob's humility and patience in pursuing Rachel.",
                 "(c) It corresponds to the seven days of creation.",
                 "(d) It represents the lunar calendar used by the Israelites."
-
-            ],
-            answer: "b"
-        },
-        {
-
-            question: "In Genesis 29, how did Laban's actions symbolize the complexities of human relationships, and what consequences followed?",
-            choices: [
-                "(a) Laban demonstrated unwavering loyalty to Jacob's cause.",
-                "(b) Laban exposed the rivalry between Leah and Rachel.",
-                "(c) Laban's intervention led to immediate reconciliation.",
-                "(d) Laban's plan resulted in Jacob's swift departure."
-
-            question: "Analyze the naming of Jacob's first two sons in Genesis 29. What prophetic significance can be attributed to their names?",
-            choices: [
-                "(a) Their names symbolize peace and unity among siblings.",
-                "(b) Their names imply divine intervention in family matters.",
-                "(c) Their names suggest harmony and prosperity in their future lives.",
-                "(d) Their names reflect the tribes they would father."
 
             ],
             answer: "b"
@@ -182,13 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
             answer: "c"
         },
         {
-            question: "In Exodus 4, what does the transformation of Moses' staff into a snake represent in the context of God's message to Pharaoh?",
-            choices: [
-                "(a) It symbolizes the overthrow of the Egyptian monarchy.",
-                "(b) It foreshadows the role of snakes in the plagues.",
-                "(c) It represents the power struggle between God and Pharaoh.",
-                "(d) It conveys the idea of reconciliation and partnership."
-         
+
               question: "In Genesis 29, how did Laban's actions symbolize the complexities of human relationships, and what consequences followed?",
             choices: [
                 "(a) Laban demonstrated unwavering loyalty to Jacob's cause.",
@@ -279,7 +233,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "(d) The message urged Pharaoh to grant the Israelites their freedom."
             ],
             answer: "d"
-
+        },
+        {
             question: "In Exodus 4, what does the transformation of Moses' staff into a snake represent in the context of God's message to Pharaoh?",
             choices: [
                 "(a) It symbolizes the overthrow of the Egyptian monarchy.",
@@ -361,7 +316,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
     ];
-    
 
     let currentQuestionIndex = 0; // Index to keep track of the current question
     let score = 0; // Variable to store the quiz score
