@@ -1,71 +1,37 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Get the refresh form and add an event listener for form submission
-    const refreshForm = document.getElementById("refresh-form");
-    refreshForm.addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent the form from submitting
-        resetQuiz(); // Call the resetQuiz function to reload the page
-    });
-
-    // Function to reset the quiz by reloading the page
-    function resetQuiz() {
-        location.reload(); // Reload the page to start the quiz over
-    }
-});
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Get elements from the DOM
-    const closeButton = document.getElementById("close-btn");
-    const quizForm = document.getElementById("quiz-form");
+    const registrationForm = document.getElementById("registration-form");
+    const quizContainer = document.querySelector(".quiz-container");
     const nextButton = document.getElementById("next-btn");
     const submitButton = document.getElementById("submit-btn");
     const firstnameInput = document.getElementById("firstname");
     const lastnameInput = document.getElementById("lastname");
     const questionText = document.getElementById("question-text");
+    const choicesContainer = document.getElementById("quiz-form");
 
-    // Function to check if the first name and last name fields are filled
-    function checkNameFields() {
-        const firstNameValue = firstnameInput.value.trim();
-        const lastNameValue = lastnameInput.value.trim();
-
-        if (firstNameValue === "" || lastNameValue === "") {
-            highlightEmptyFields();
-            return false;
-        }
-        return true;
-    }
-
-    // Function to highlight empty fields
-    function highlightEmptyFields() {
-        const firstNameValue = firstnameInput.value.trim();
-        const lastNameValue = lastnameInput.value.trim();
-
-        firstnameInput.style.borderColor = firstNameValue === "" ? "red" : "";
-        lastnameInput.style.borderColor = lastNameValue === "" ? "red" : "";
-    }
     const physicsQuestions = [
-        {
-            question: "What is the SI unit of force?",
-            choices: [
-                "(a) Newton",
-                "(b) Joule",
-                "(c) Watt",
-                "(d) Pascal"
-            ],
-            answer: "a"
-        },
-        {
-            question: "In the electromagnetic spectrum, which type of wave has the shortest wavelength?",
-            choices: [
-                "(a) Radio waves",
-                "(b) Microwaves",
-                "(c) X-rays",
-                "(d) Gamma rays"
-            ],
-            answer: "d"
-        },
-        {
-            question: "What is the formula for calculating kinetic energy?",
-            choices: [
+
+        { question: "What is the SI unit of force?", 
+        choices: [
+            "(a) Newton", 
+            "(b) Joule", 
+            "(c) Watt", 
+            "(d) Pascal"
+        ],
+             answer: "a" 
+            },
+
+        { question: "In the electromagnetic spectrum, which type of wave has the shortest wavelength?", 
+        choices: [
+            "(a) Radio waves", 
+            "(b) Microwaves", 
+            "(c) X-rays", 
+            "(d) Gamma rays"
+        ], answer: "d" 
+            },
+    
+        {   question: "What is the formula for calculating kinetic energy?",
+        choices: [
                 "(a) KE = mgh",
                 "(b) KE = 1/2 * mv^2",
                 "(c) KE = P / t",
@@ -343,74 +309,133 @@ question: "What is the primary function of a semiconductor diode?",
         "(d) 900,000 km/s"
     ],
     answer: "a"
-},
-    ]
+}
+];
 
+let currentQuestionIndex = 0;
+            let score = 0;
+            let hasRegistered = false;
+            let hasSubmitted = false;
+            let participantName = "";  
+            let timer;
 
-    let currentQuestionIndex = 0; // Index to keep track of the current question
-    let score = 0; // Variable to store the quiz score
-    let hasSubmitted = false; // Flag to check if the quiz has been submitted
-
-    // Function to load a question and its choices
-    function loadQuestion() {
-        const currentQuestion = questions[currentQuestionIndex];
-        questionText.textContent = currentQuestion.question;
-
-        const choicesHTML = currentQuestion.choices.map(choice => {
-            return `<label><input type="radio" name="q" value="${choice.charAt(1).toLowerCase()}">${choice}</label><br>`;
-        }).join("");
-
-        quizForm.innerHTML = choicesHTML;
-    }
-
-    // Function to check the selected answer and proceed to the next question
-    function checkAnswer() {
-        if (hasSubmitted) {
-            alert("You have already submitted the quiz. Please take a screenshot of your results.");
-            return;
-        }
-
-        if (!checkNameFields()) {
-            return; // Don't proceed with the quiz if name fields are not filled
-        }
-
-        const selectedAnswer = document.querySelector('input[name="q"]:checked');
-        if (selectedAnswer) {
-            if (selectedAnswer.value === questions[currentQuestionIndex].answer) {
-                score++; // Increase the score if the answer is correct
+            function showQuizForm() {
+                registrationForm.style.display = "none";
+                quizContainer.style.display = "block";
+                participantName = `${firstnameInput.value} ${lastnameInput.value}`;
+                loadQuestion();
+                startTimer();
             }
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion(); // Load the next question
-            } else {
+
+            function startTimer() {
+                const timerDuration = 20000;  // 20 seconds
+                timer = setTimeout(() => {
+                    // Automatically move to the next question when the timer expires
+                    checkAnswer();
+                }, timerDuration);
+            }
+
+            function resetTimer() {
+                clearTimeout(timer);
+                startTimer();
+            }
+
+            function loadQuestion() {
+                const currentQuestion = physicsQuestions[currentQuestionIndex];
+                questionText.textContent = `${participantName}, ${currentQuestion.question}`;
+
+                const choicesHTML = currentQuestion.choices.map(choice => {
+                    return `<label><input type="radio" name="q" value="${choice.charAt(1).toLowerCase()}">${choice}</label><br>`;
+                }).join("");
+
+                choicesContainer.innerHTML = choicesHTML;
+                resetTimer();
+            }
+
+            function checkNameFields() {
+                const firstNameValue = firstnameInput.value.trim();
+                const lastNameValue = lastnameInput.value.trim();
+
+                if (firstNameValue === "" || lastNameValue === "") {
+                    highlightEmptyFields();
+                    return false;
+                }
+                return true;
+            }
+
+            function highlightEmptyFields() {
+                const firstNameValue = firstnameInput.value.trim();
+                const lastNameValue = lastnameInput.value.trim();
+
+                firstnameInput.style.borderColor = firstNameValue === "" ? "red" : "";
+                lastnameInput.style.borderColor = lastNameValue === "" ? "red" : "";
+            }
+
+            function registerUser() {
+                if (!checkNameFields()) {
+                    return;
+                }
+
+                hasRegistered = true;
                 const fullName = `${firstnameInput.value} ${lastnameInput.value}`;
-                questionText.textContent = `Quiz completed, ${fullName}! Your score: ${score}/${questions.length}`;
-                quizForm.style.display = "none";
-                nextButton.style.display = "none";
-                submitButton.style.display = "block";
-                hasSubmitted = true;
+                alert(`Thank you, ${fullName}, for registering! You are now ready to start the quiz.`);
+                // Show the quiz questions after registration
+                showQuizForm();
             }
-        } else {
-            alert("Please select an answer before submitting.");
-        }
-    }
 
-    // Add event listeners
-    nextButton.addEventListener("click", checkAnswer);
-    loadQuestion();
+            function checkAnswer() {
+                if (!hasRegistered) {
+                    alert("Please register first before attempting the quiz.");
+                    return;
+                }
 
-    // Reset border color on input focus
-    firstnameInput.addEventListener("focus", () => {
-        firstnameInput.style.borderColor = "";
-    });
+                if (hasSubmitted) {
+                    alert("You have already submitted the quiz. Please take a screenshot of your results.");
+                    return;
+                }
 
-    lastnameInput.addEventListener("focus", () => {
-        lastnameInput.style.borderColor = "";
-    });
+                const selectedAnswer = document.querySelector('input[name="q"]:checked');
+                if (selectedAnswer) {
+                    if (selectedAnswer.value === physicsQuestions[currentQuestionIndex].answer) {
+                        score++;
+                    }
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < physicsQuestions.length) {
+                        loadQuestion();
+                    } else {
+                        const fullName = `${firstnameInput.value} ${lastnameInput.value}`;
+                        questionText.textContent = `Quiz completed, ${fullName}! Your score: ${score}/${physicsQuestions.length}`;
+                        quizContainer.style.display = "none";
+                        nextButton.style.display = "none";
+                        submitButton.style.display = "block";
+                        hasSubmitted = true;
+                    }
+                } else {
+                    alert("Please select an answer before submitting.");
+                }
+            }
 
-    // Add an event listener to the close button to close the window
-    closeButton.addEventListener("click", function () {
-        window.close();
-    });
-});
+            registrationForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                registerUser();
+            });
 
+            nextButton.addEventListener("click", function () {
+                // Check if the user has registered before showing the quiz
+                if (!hasRegistered) {
+                    alert("Please register first before attempting the quiz.");
+                    return;
+                }
+
+                // Show the next question
+                checkAnswer();
+            });
+
+            firstnameInput.addEventListener("focus", () => {
+                firstnameInput.style.borderColor = "";
+            });
+
+            lastnameInput.addEventListener("focus", () => {
+                lastnameInput.style.borderColor = "";
+            });
+        });

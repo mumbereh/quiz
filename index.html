@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weekly physics quiz</title>
-    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header Section -->
@@ -16,22 +16,27 @@
 
     <!-- Participant Info Section -->
     <div class="participant-info">
-        <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname" class="required-input">
-        <br>
-        <label for="lastname">Last Name:</label>
-        <input type="text" id="lastname" name="lastname" class="required-input">
+        <form id="registration-form">
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" class="required-input">
+            <br>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" class="required-input">
+            <br>
+            <input class="reg" type="submit" value="Register">
+        </form>
     </div>
 
     <!-- Quiz Container -->
-    <div class="quiz-container">
-
+    <div class="quiz-container" style="display: none;">
         <h3>Weekly physics quiz</h3>
-
         <div class="question">
             <p id="question-text"></p>
             <hr>
             <form id="quiz-form"></form>
+        </div>
+        <div class="timer">
+            <p id="timer"></p>
         </div>
         <div class="button-container">
             <button id="next-btn" class="button">Next</button>
@@ -52,16 +57,14 @@
     <!-- Bible Verse Section -->
     <div class="verse-section">
         <p id="verse">
-        ""Unlock limitless possibilities: Master cutting-edge,
-         technologies and elevate your skills with our
-          immersive learning experience!"!"
+            "Unlock limitless possibilities: Master cutting-edge,
+            technologies and elevate your skills with our
+            immersive learning experience!"
         </p>
     </div>
 
     <!-- Designer Info -->
     <p id="designer">@kim learn faster</p>
-
-    <!-- JavaScript -->
     <script src="index.js"></script>
 </body>
 </html>
