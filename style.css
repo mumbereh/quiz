@@ -275,7 +275,7 @@ button:hover {
     border-radius: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
-    border: 2px solid ;
+    border: 2px solid transparent;
 }
 
 .reg:hover{
